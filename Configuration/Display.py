@@ -3,7 +3,7 @@ import bcolors as bcolors
 from tabulate import tabulate
 import Configuration.Config
 from Configuration import Requests
-from math import *
+from math import ceil
 
 
 class Display:

@@ -6,7 +6,7 @@ import Configuration.Config
 from Configuration import Config
 from Configuration import Requests
 from Configuration.Display import Display
-from math import *
+from math import ceil
 
 
 class Engine:
