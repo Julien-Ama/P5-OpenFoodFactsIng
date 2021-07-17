@@ -14,7 +14,7 @@ To extract the api data, please see in Configuration.Config(Api/DB)
 ------------------------------------------------------------------------------
 
 Le coeur de notre projet se trouve dans le dossier, fichier "Engine";
-activé par notre fichier "Api" et alimentée par toute les données récupérées et réparties
+activé par notre fichier "Reception" et alimentée par toute les données récupérées et réparties
 dans notre dossier "Data".
 Notre "Engine" peut ainsi lancer son mécanisme en puisant dans notre dossier configuration 
 pour y parfaire son dynamisme de requêtes et d'affichages.
@@ -42,7 +42,7 @@ specifications:
 --------------------------------------------------------------------------------
 
 The heart of our project is in the folder, file "Engine"; 
-activated by our "Api" file and fed by all the data recovered and distributed in our "Data" folder. 
+activated by our "Reception" file and fed by all the data recovered and distributed in our "Data" folder. 
 Our "Engine" can thus launch its mechanism by drawing on our configuration folder to perfect its dynamism of requests and displays.
 
 This is a simple structure with only 3 tables.
