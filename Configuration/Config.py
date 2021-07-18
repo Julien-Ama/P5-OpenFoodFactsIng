@@ -2,7 +2,7 @@
 import mysql.connector
 import bcolors
 
-nbreOfProduct = 250
+nbreOfProduct = 25
 
 ninetyPercent = round(nbreOfProduct * (0.90))
 eightyPercent = round(nbreOfProduct * (0.80))
@@ -41,9 +41,9 @@ dataBase = mysql.connector.connect(host='localhost',
 
 # -------- short Text -------- #
 
-firsTime = (bcolors.WARN +
-            "Si il s'agit de votre première utilisation, "
-            "inserez la touche: 'i'\n" + "")
+# firsTime = (bcolors.WARN +
+#             "Si il s'agit de votre première utilisation, "
+#             "inserez la touche: 'i'\n" + "")
 
 displaySelectProd = (bcolors.BLUE +
                      "1 - Chercher un produit en inscrivant son nom\n"

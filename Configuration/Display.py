@@ -29,7 +29,7 @@ class Display:
               "Vous souhaitez exécuter la commande numéro :")
 
     # Product search by ID
-    def idProduct(self, cursor, connection, oneProduct, allProduct):
+    def idProduct(self, cursor):
         # Result of "nameProduct" or "idProduct:"
         print(bcolors.BLUE + "Entrez le numéro de votre produit:")
 
@@ -43,7 +43,7 @@ class Display:
         cursor.execute(request1, val)
 
     # Product search by name
-    def nameProduct(self, cursor, connection, oneProduct, allProduct):
+    def nameProduct(self, cursor):
         print(bcolors.BLUE + "Entrez le nom de votre produit:")
         x = input(bcolors.PASS)
         print(bcolors.BLUE + "Vous avez sélectionné le produit:",
@@ -194,7 +194,8 @@ class Display:
                   " code :" + bcolors.PASS + "[" + liste[4] + "] " + liste[5])
         print("")
 
-    def welcome(self, allProduct):
+    def welcome(self):
+
         text = Configuration.Config.one
         print(text)
         text = Configuration.Config.two
@@ -213,8 +214,8 @@ class Display:
         print(text)
         text = Configuration.Config.nine
         print(text)
-        text = Configuration.Config.firsTime
-        print(text)
+        # text = Configuration.Config.firsTime
+        # print(text)
 
     def initAll(self, allProduct):
         if len(allProduct) == Configuration.Config.tenPercent:

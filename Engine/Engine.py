@@ -10,63 +10,79 @@ from math import ceil
 
 
 class Engine:
-    def __init__(self):
+    def __init__(self, hasData):
+        self.hasData = hasData
         pass
 
-    # the user starts at the menu
-    def menu(self, cursor, connection, oneProduct, allProduct):
+    def checkData(self, cursor, connection, allProduct):
         myDisplay = Display()
-        myDisplay.displayMenu()
-        x = input(bcolors.PASS)
-        if x == "1":
-            self.getProductByPage(1, cursor,
-                                  connection, oneProduct, allProduct)
-        elif x == "2":
-            self.selectProduct(cursor, connection, oneProduct, allProduct)
-            if x == "0":
-                self.menu(cursor, connection, oneProduct, allProduct)
+        request = Requests.tcheckProducts
+        cursor.execute(request)
+        tcheck = cursor.fetchall()
+        if len(tcheck) == 0:
+            self.hasData = False
+        if len(tcheck) > 0:
+            self.hasData = True
+            myDisplay.welcome()
+        self.menu(cursor, connection, allProduct)
+
+    # the user starts at the menu
+    def menu(self, cursor, connection, allProduct):
+        if self.hasData is False:
+            self.initialization(connection, allProduct)
+        else:
+            myDisplay = Display()
+            myDisplay.displayMenu()
+            x = input(bcolors.PASS)
+            if x == "1":
+                self.getProductByPage(1, cursor,
+                                      connection, allProduct)
+            elif x == "2":
+                self.selectProduct(cursor, connection, allProduct)
+                if x == "0":
+                    self.menu(cursor, connection, allProduct)
+                else:
+                    text = Config.mauvaiseTouche
+                    print(text)
+                    self.menu(cursor, connection, allProduct)
+            elif x == "3":
+                self.exitClean(connection)
+            elif x == "7":
+                self.favoriList(cursor, connection, allProduct)
+            elif x == "9":
+                self.cleanList(connection, allProduct)
+            elif x == "5":
+                self.getCategoriesByPage(1, cursor,
+                                         connection, allProduct)
+            elif x == "i":
+                self.initialization(connection, allProduct)
+
             else:
                 text = Config.mauvaiseTouche
                 print(text)
-                self.menu(cursor, connection, oneProduct, allProduct)
-        elif x == "3":
-            self.exitClean(connection, oneProduct, allProduct)
-        elif x == "7":
-            self.favoriList(cursor, connection, oneProduct, allProduct)
-        elif x == "9":
-            self.cleanList(connection, oneProduct, allProduct)
-        elif x == "5":
-            self.getCategoriesByPage(1, cursor,
-                                     connection, oneProduct, allProduct)
-        elif x == "i":
-            self.initialization(connection, oneProduct, allProduct)
-
-        else:
-            text = Config.mauvaiseTouche
-            print(text)
-            self.menu(cursor, connection, oneProduct, allProduct)
+                self.menu(cursor, connection, allProduct)
 
     # Select a detailed product by name or id
-    def selectProduct(self, cursor, connection, oneProduct, allProduct):
+    def selectProduct(self, cursor, connection, allProduct):
         myDisplay = Display()
         text = Config.displaySelectProd
         print(text)
         x = input()
         if x == "1":
-            myDisplay.nameProduct(cursor, connection, oneProduct, allProduct)
-            self.resultProduct(cursor, connection, oneProduct, allProduct)
+            myDisplay.nameProduct(cursor)
+            self.resultProduct(cursor, connection, allProduct)
         elif x == "3":
-            myDisplay.idProduct(cursor, connection, oneProduct, allProduct)
-            self.resultProduct(cursor, connection, oneProduct, allProduct)
+            myDisplay.idProduct(cursor)
+            self.resultProduct(cursor, connection, allProduct)
         elif x == "0":
-            self.menu(cursor, connection, oneProduct, allProduct)
+            self.menu(cursor, connection, allProduct)
         else:
             text = Config.mauvaiseTouche
             print(text)
-            self.selectProduct(cursor, connection, oneProduct, allProduct)
+            self.selectProduct(cursor, connection, allProduct)
 
     # Look for a substitute of the product
-    def resultProduct(self, cursor, connection, oneProduct, allProduct):
+    def resultProduct(self, cursor, connection, allProduct):
         myDisplay = Display
         answer = cursor.fetchall()
         for a in answer:
@@ -82,25 +98,25 @@ class Engine:
                     for product in products:
                         if "a" in product:
                             self.substitu(product, cursor,
-                                          connection, oneProduct, allProduct)
+                                          connection, allProduct)
                 else:
                     if any("b" in word for word in products):
                         for product in products:
                             if "b" in product:
                                 self.substitu(product, cursor, connection,
-                                              oneProduct, allProduct)
+                                              allProduct)
                     else:
                         if any("c" in word for word in products):
                             for product in products:
                                 if "c" in product:
                                     self.substitu(product, cursor, connection,
-                                                  oneProduct, allProduct)
+                                                  allProduct)
                         else:
                             if any("d" in word for word in products):
                                 for product in products:
                                     if "d" in product:
                                         self.substitu(product, cursor,
-                                                      connection, oneProduct,
+                                                      connection,
                                                       allProduct)
                             else:
                                 if any("e" in word for word in products):
@@ -108,21 +124,20 @@ class Engine:
                                         if "e" in product:
                                             self.substitu(product, cursor,
                                                           connection,
-                                                          oneProduct,
+
                                                           allProduct)
 
             else:
                 self.selectDisplay(pageNumber=0, cursor=cursor,
                                    connection=connection,
-                                   oneProduct=oneProduct,
                                    allProduct=allProduct)
         else:
             text = Config.produitInnexistant
             print(text)
-            self.selectProduct(cursor, connection, oneProduct, allProduct)
+            self.selectProduct(cursor, connection, allProduct)
 
     # Save your favorites
-    def substitu(self, product, cursor, connection, oneProduct, allProduct):
+    def substitu(self, product, cursor, connection, allProduct):
         myDisplay = Display()
         myDisplay.displaySubtitu(product)
         x = input()
@@ -135,15 +150,15 @@ class Engine:
             connection.commit()
             self.selectDisplay(pageNumber=0,
                                cursor=cursor, connection=connection,
-                               oneProduct=oneProduct, allProduct=allProduct)
+                               allProduct=allProduct)
         else:
             self.selectDisplay(pageNumber=0,
                                cursor=cursor, connection=connection,
-                               oneProduct=oneProduct, allProduct=allProduct)
+                               allProduct=allProduct)
 
     # Displaying products by page
     def getProductByPage(self, pageNumber, cursor, connection,
-                         oneProduct, allProduct):
+                         allProduct):
         # know the number of pages
         request = Requests.tcheckProducts
         cursor.execute(request)
@@ -160,10 +175,10 @@ class Engine:
         maxPage = cursor.fetchone()[0]
         if offset < minPage:
             self.getProductByPage(lastPage,
-                                  cursor, connection, oneProduct, allProduct)
+                                  cursor, connection, allProduct)
         if offset > maxPage:
             self.getProductByPage(1,
-                                  cursor, connection, oneProduct, allProduct)
+                                  cursor, connection, allProduct)
         text = Config.displayAllProducts
         print(text)
         request = Requests.pagesOfProducts
@@ -173,36 +188,36 @@ class Engine:
         myDisplay.displayPageProd(cursor, offset)
 
         self.selectDisplay(pageNumber,
-                           cursor, connection, oneProduct, allProduct)
+                           cursor, connection, allProduct)
 
     # Select a display (1)
     def selectDisplay(self,
-                      pageNumber, cursor, connection, oneProduct, allProduct):
+                      pageNumber, cursor, connection, allProduct):
         myDisplay = Display()
         x = myDisplay.displayMenuProduct(pageNumber)
         if x == "0":
-            self.menu(cursor, connection, oneProduct, allProduct)
+            self.menu(cursor, connection, allProduct)
         elif x == "7":
             self.getProductByPage(pageNumber - 1,
-                                  cursor, connection, oneProduct, allProduct)
+                                  cursor, connection, allProduct)
         elif x == "8":
             self.getProductByPage(pageNumber + 1,
-                                  cursor, connection, oneProduct, allProduct)
+                                  cursor, connection, allProduct)
         elif x == "2":
-            self.selectProduct(cursor, connection, oneProduct, allProduct)
+            self.selectProduct(cursor, connection, allProduct)
         elif x == "5":
             self.getCategoriesByPage(1, cursor, connection,
-                                     oneProduct, allProduct)
+                                     allProduct)
         elif x == "3":
-            self.exitClean(connection, oneProduct, allProduct)
+            self.exitClean(connection)
         else:
             text = Config.mauvaiseTouche
             print(text)
             self.selectDisplay(pageNumber,
-                               cursor, connection, oneProduct, allProduct)
+                               cursor, connection, allProduct)
 
     # Displaying categories by page
-    def getCategoriesByPage(self, pageNumber, cursor, connection, oneProduct,
+    def getCategoriesByPage(self, pageNumber, cursor, connection,
                             allProduct):
         # know the number of pages
         request = Requests.tcheckCategories
@@ -219,10 +234,10 @@ class Engine:
         cursor.execute(request)
         maxPage = cursor.fetchone()[0]
         if offset < minPage:
-            self.getCategoriesByPage(lastPage, cursor, connection, oneProduct,
+            self.getCategoriesByPage(lastPage, cursor, connection,
                                      allProduct)
         if offset > maxPage:
-            self.getCategoriesByPage(1, cursor, connection, oneProduct,
+            self.getCategoriesByPage(1, cursor, connection,
                                      allProduct)
         text = Config.selectCategories
         print(text)
@@ -235,37 +250,37 @@ class Engine:
         Display.displayPageCategorie(self=allProduct,
                                      offset=offset, lastPage=lastPage)
 
-        self.selectCategorie(pageNumber, cursor, connection, oneProduct,
+        self.selectCategorie(pageNumber, cursor, connection,
                              allProduct, products, pageNumber)
 
     # Select a category(1)
-    def selectCategorie(self, pageNumber, cursor, connection, oneProduct,
+    def selectCategorie(self, pageNumber, cursor, connection,
                         allProduct, products, numberOfPage):
         myDisplay = Display()
 
         x = myDisplay.displayMenuCategorie(numberOfPage)
         if x == "0":
-            self.menu(cursor, connection, oneProduct, allProduct)
+            self.menu(cursor, connection, allProduct)
         elif x == "7":
             self.getCategoriesByPage(pageNumber - 1, cursor, connection,
-                                     oneProduct, allProduct)
+                                     allProduct)
         elif x == "8":
             self.getCategoriesByPage(pageNumber + 1, cursor, connection,
-                                     oneProduct, allProduct)
+                                     allProduct)
         elif x == "2":
-            self.categorysProducts(pageNumber, cursor, connection, oneProduct,
+            self.categorysProducts(pageNumber, cursor, connection,
                                    allProduct)
         elif x == "3":
-            self.exitClean(connection, oneProduct, allProduct)
+            self.exitClean(connection)
 
         else:
             text = Config.mauvaiseTouche
             print(text)
-            self.selectCategorie(pageNumber, cursor, connection, oneProduct,
+            self.selectCategorie(pageNumber, cursor, connection,
                                  allProduct, products, numberOfPage)
 
     # result of category
-    def categorysProducts(self, pageNumber, cursor, connection, oneProduct,
+    def categorysProducts(self, pageNumber, cursor, connection,
                           allProduct):
         myDisplay = Display
         text = Config.selectCategoriesProd
@@ -292,25 +307,25 @@ class Engine:
                     for product in products:
                         if "a" in product:
                             self.substitu(product, cursor,
-                                          connection, oneProduct, allProduct)
+                                          connection, allProduct)
                 else:
                     if any("b" in word for word in products):
                         for product in products:
                             if "b" in product:
                                 self.substitu(product, cursor, connection,
-                                              oneProduct, allProduct)
+                                              allProduct)
                     else:
                         if any("c" in word for word in products):
                             for product in products:
                                 if "c" in product:
                                     self.substitu(product, cursor, connection,
-                                                  oneProduct, allProduct)
+                                                  allProduct)
                         else:
                             if any("d" in word for word in products):
                                 for product in products:
                                     if "d" in product:
                                         self.substitu(product, cursor,
-                                                      connection, oneProduct,
+                                                      connection,
                                                       allProduct)
                             else:
                                 if any("e" in word for word in products):
@@ -318,47 +333,45 @@ class Engine:
                                         if "e" in product:
                                             self.substitu(product, cursor,
                                                           connection,
-                                                          oneProduct,
+
                                                           allProduct)
             else:
                 self.getCategoriesByPage(pageNumber, cursor, connection,
-                                         oneProduct, allProduct)
+                                         allProduct)
 
     # Save to user's list
-    def favoriList(self, cursor, connection, oneProduct, allProduct):
+    def favoriList(self, cursor, connection, allProduct):
         myDisplay = Display()
         request = Requests.listFavori
         cursor.execute(request)
         myDisplay.displayFavori(cursor)
-        self.menu(cursor, connection, oneProduct, allProduct)
+        self.menu(cursor, connection, allProduct)
 
     #  empty your list
-    def cleanList(self, connection, oneProduct, allProduct):
+    def cleanList(self, connection, allProduct):
         cursor = connection.cursor()
         request = Requests.emptyList
         cursor.execute(request)
         connection.commit()
         text = Config.emptyList
         print(text)
-        self.menu(cursor, connection, oneProduct, allProduct)
+        self.menu(cursor, connection, allProduct)
 
-    def initialization(self, connection, oneProduct, allProduct):
+    def initialization(self, connection, allProduct):
         myApi = Api()
         cursor = connection.cursor()
         cursor.execute(Requests.cleanProducts)
         cursor.execute(Requests.cleanCategorieProd)
         myApi.dataBase()
         connection.commit()
-        self.menu(cursor, connection, oneProduct, allProduct)
+        self.hasData = True
+        self.menu(cursor, connection, allProduct)
 
     # closing the program
-    def exitClean(self, connection, oneProduct, allProduct):
+    def exitClean(self, connection):
         myDisplay = Display()
         myDisplay.goodBye()
         cursor = connection.cursor()
         cursor.execute(Requests.cleanCategorieProd)
-
-        allProduct.append(oneProduct)
-        connection.commit()
 
         sys.exit(1)
