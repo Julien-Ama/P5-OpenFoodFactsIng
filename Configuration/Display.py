@@ -49,14 +49,14 @@ class Display:
         print(bcolors.BLUE + "Vous avez sélectionné le produit:",
               bcolors.PASS + "")
         request1 = ("select id, brands, categories, nutriscore_grade,"
-                    " code, product_name_fr from products "
+                    " code, product_name_fr, url from products "
                     "where product_name_fr like %s")
         val = ("%" + x + "%",)
         cursor.execute(request1, val)
 
     def displayResultProd(self, a):
         print("[" + str(a[0]) + "] - " + a[5] + " [" + a[2] +
-              "] Nutriscore : [" + a[3] + "] code: " + a[4])
+              "] Nutriscore : [" + a[3] + "] code: " + a[4] + "\n" + a[6])
         print(" ")
         print(bcolors.WARN + "1" + bcolors.BLUE +
               " - Trouver un produit équivalent de meilleur qualité et "
@@ -69,7 +69,8 @@ class Display:
         print("[" + str(product[0]) + "] - " + product[1] +
               " [" + product[3] + "]" + bcolors.BLUE + " Magasin :"
               + bcolors.PASS + "[" + product[4] + "]" + bcolors.BLUE +
-              " code :" + bcolors.PASS + "[" + product[5] + "]")
+              " code :" + bcolors.PASS + "[" + product[5] + "]\n"
+              + product[6])
         print("")
         print(bcolors.WARN + "Voulez-vous inscrire ce produit sur "
                              "votre liste ?")
@@ -134,6 +135,8 @@ class Display:
                 print(bcolors.WARN + "7" + bcolors.BLUE +
                       " - Page précédente")
             print(bcolors.WARN + "8" + bcolors.BLUE + " - Page suivante")
+        print(bcolors.WARN + "5" + bcolors.BLUE +
+              " - Recherche des produits par catégorie")
         print(bcolors.WARN + "3" + bcolors.BLUE + " - Fermer le programme")
         return input()
 

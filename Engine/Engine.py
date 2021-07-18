@@ -191,7 +191,7 @@ class Engine:
         elif x == "2":
             self.selectProduct(cursor, connection, oneProduct, allProduct)
         elif x == "5":
-            self.getCategoriesByPage(pageNumber, cursor, connection,
+            self.getCategoriesByPage(1, cursor, connection,
                                      oneProduct, allProduct)
         elif x == "3":
             self.exitClean(connection, oneProduct, allProduct)
