@@ -37,7 +37,7 @@ class Display:
         print(bcolors.BLUE + "Vous avez sélectionné le produit:",
               bcolors.PASS + "")
         request1 = ("select id, brands, categories, nutriscore_grade,"
-                    " code, product_name_fr from products "
+                    " code, product_name_fr, url from products "
                     "where id like %s")
         val = ("%" + x + "%",)
         cursor.execute(request1, val)
@@ -188,7 +188,7 @@ class Display:
             print(bcolors.PASS + "[" + str(liste[0]) + "] - " + liste[1] +
                   " [" + liste[2] + "]" + bcolors.BLUE + " Magasin :"
                   + bcolors.PASS + "[" + liste[3] + "]" + bcolors.BLUE +
-                  " code :" + bcolors.PASS + "[" + liste[4] + "]")
+                  " code :" + bcolors.PASS + "[" + liste[4] + "] " + liste[5])
         print("")
 
     def welcome(self, allProduct):

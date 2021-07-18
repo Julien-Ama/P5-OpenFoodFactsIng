@@ -14,8 +14,8 @@ insertCategorieProd = "INSERT INTO categorieprod (categories) " \
                       "ORDER BY categories;"
 
 SaveFavorites = "INSERT INTO favori " \
-                "(brands, nutriscore_grade, stores, code) " \
-                "VALUES (%s, %s, %s, %s)"
+                "(brands, nutriscore_grade, stores, code, url) " \
+                "VALUES (%s, %s, %s, %s, %s)"
 
 # -------- REQUESTS Select -------- #
 
@@ -24,7 +24,7 @@ tcheckProducts = "SELECT * FROM products"
 tcheckCategories = "SELECT * FROM categorieprod"
 
 sheachSubtitus = "SELECT id, brands, categories, nutriscore_grade,"\
-                 " stores, code from products " \
+                 " stores, code, url from products " \
                  "WHERE categories = %s"
 
 limitOfRecords = "SELECT count(*) FROM products"

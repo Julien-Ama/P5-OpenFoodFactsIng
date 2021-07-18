@@ -128,7 +128,7 @@ class Engine:
         x = input()
         if x == "1":
             request = Requests.SaveFavorites
-            val = (product[1], product[3], product[4], product[5])
+            val = (product[1], product[3], product[4], product[5], product[6])
             cursor.execute(request, val)
             text = Configuration.Config.saveFavory
             print(text)
