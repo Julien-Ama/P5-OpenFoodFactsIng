@@ -33,7 +33,7 @@ specifications:
 
 - [x] Sélectionnez la catégorie. [Plusieurs propositions associées à un chiffre. L'utilisateur entre le chiffre correspondant et appuie sur entrée]
 - [x] Sélectionnez l'aliment. [Plusieurs propositions associées à un chiffre. L'utilisateur entre le chiffre correspondant à l'aliment choisi et appuie sur entrée]
-- [x] Le programme propose un substitut, sa description, un magasin ou l'acheter
+- [x] Le programme propose un substitut, sa description, un magasin ou l'acheter et un lien vers la page d'Open Food Facts concernant cet aliment.
 - [x] L'utilisateur a alors la possibilité d'enregistrer le résultat dans la base de données
 - [x] Recherche d'aliments dans la base Open Food Facts.
 - [x] L'utilisateur interagit avec le programme dans le terminal
