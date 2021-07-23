@@ -2,7 +2,7 @@
 import bcolors as bcolors
 from tabulate import tabulate
 import Configuration.Config
-from Configuration import Requests
+from Data import Text, Requests
 from math import ceil
 
 
@@ -37,7 +37,7 @@ class Display:
         print(bcolors.BLUE + "Vous avez sélectionné le produit:",
               bcolors.PASS + "")
         request1 = ("select id, brands, categories, nutriscore_grade,"
-                    " code, product_name_fr, url from products "
+                    " code, product_name_fr, url from product "
                     "where id like %s")
         val = ("%" + x + "%",)
         cursor.execute(request1, val)
@@ -49,7 +49,7 @@ class Display:
         print(bcolors.BLUE + "Vous avez sélectionné le produit:",
               bcolors.PASS + "")
         request1 = ("select id, brands, categories, nutriscore_grade,"
-                    " code, product_name_fr, url from products "
+                    " code, product_name_fr, url from product "
                     "where product_name_fr like %s")
         val = ("%" + x + "%",)
         cursor.execute(request1, val)
@@ -196,62 +196,60 @@ class Display:
 
     def welcome(self):
 
-        text = Configuration.Config.one
+        text = Text.one
         print(text)
-        text = Configuration.Config.two
+        text = Text.two
         print(text)
-        text = Configuration.Config.three
+        text = Text.three
         print(text)
-        text = Configuration.Config.four
+        text = Text.four
         print(text)
-        text = Configuration.Config.five
+        text = Text.five
         print(text)
-        text = Configuration.Config.six
+        text = Text.six
         print(text)
-        text = Configuration.Config.seven
+        text = Text.seven
         print(text)
-        text = Configuration.Config.height
+        text = Text.height
         print(text)
-        text = Configuration.Config.nine
+        text = Text.nine
         print(text)
-        # text = Configuration.Config.firsTime
-        # print(text)
 
     def initAll(self, allProduct):
         if len(allProduct) == Configuration.Config.tenPercent:
-            text = Configuration.Config.one
+            text = Text.one
             print(text)
         if len(allProduct) == Configuration.Config.twentyPercent:
-            text = Configuration.Config.two
+            text = Text.two
             print(text)
         if len(allProduct) == Configuration.Config.thirtyPercent:
-            text = Configuration.Config.three
+            text = Text.three
             print(text)
         if len(allProduct) == Configuration.Config.fourtyPercent:
-            text = Configuration.Config.four
+            text = Text.four
             print(text)
         if len(allProduct) == Configuration.Config.fiftyPercent:
-            text = Configuration.Config.five
+            text = Text.five
             print(text)
         if len(allProduct) == Configuration.Config.sixtyPercent:
-            text = Configuration.Config.six
+            text = Text.six
             print(text)
         if len(allProduct) == Configuration.Config.seventyPercent:
-            text = Configuration.Config.seven
+            text = Text.seven
             print(text)
         if len(allProduct) == Configuration.Config.eightyPercent:
-            text = Configuration.Config.height
+            text = Text.height
             print(text)
         if len(allProduct) == Configuration.Config.ninetyPercent:
-            text = Configuration.Config.nine
+            text = Text.nine
             print(text)
 
     def goodBye(self):
         print(bcolors.WARN + "Au revoir" + bcolors.BLUE)
         print("")
-        bye = [Configuration.Config.un,
-               Configuration.Config.deux,
-               Configuration.Config.trois,
-               Configuration.Config.quatre]
+        bye = [Text.un,
+               Text.deux,
+               Text.trois,
+               Text.quatre]
         for b in bye:
             print(b)

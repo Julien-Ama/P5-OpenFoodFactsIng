@@ -1,9 +1,9 @@
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# Table products
+# Table product
 
-CREATE TABLE IF NOT EXISTS `products`
+CREATE TABLE IF NOT EXISTS `product`
 (
 `id` INT(11) NOT NULL AUTO_INCREMENT,
 `brands` VARCHAR(80) NOT NULL,
@@ -20,9 +20,9 @@ ENGINE = MyISAM
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
 
-# Table favori
+# Table favorite
 
-CREATE TABLE IF NOT EXISTS `favori`
+CREATE TABLE IF NOT EXISTS `favorite`
 (
 `id` INT(11) NOT NULL AUTO_INCREMENT,
 `brands` VARCHAR(80) NOT NULL,
@@ -34,9 +34,9 @@ CREATE TABLE IF NOT EXISTS `favori`
 PRIMARY KEY(`id`)
 );
 
-# Table categorieProd
+# Table category
 
-CREATE TABLE IF NOT EXISTS `categorieProd`
+CREATE TABLE IF NOT EXISTS `category`
 (
 `id` INT(11) NOT NULL AUTO_INCREMENT,
 `categories` VARCHAR(950) NOT NULL,

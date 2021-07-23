@@ -1,5 +1,5 @@
 # coding=utf-8
-from Configuration import Requests
+from Data import Requests
 
 
 class Product:
@@ -25,5 +25,5 @@ class Product:
             "url": self.url,
             "categories": self.categories
         }
-        my_request = Requests.insertProducts
+        my_request = Requests.insertProduct
         cursor.execute(my_request, data_product)

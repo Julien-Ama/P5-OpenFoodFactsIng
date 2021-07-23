@@ -1,6 +1,6 @@
 # coding=utf-8
 from Engine.Engine import Engine
-from Data.CategorieProd import CategorieProd
+from Data.Category import Category
 from Configuration import Config
 
 
@@ -16,7 +16,7 @@ class Reception:
         connection = Config.dataBase
         cursor = connection.cursor()
 
-        myCategories = CategorieProd()
+        myCategories = Category()
         myCategories.categoriesInsert(cursor, connection)
         myEngine = Engine(hasData)
         myEngine.checkData(cursor, connection, allProduct)

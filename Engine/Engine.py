@@ -2,10 +2,8 @@
 import bcolors as bcolors
 import sys
 from Data.Api import Api
-import Configuration.Config
-from Configuration import Config
-from Configuration import Requests
-from Configuration.Display import Display
+from Data import Text, Requests
+from Data.Display import Display
 from math import ceil
 
 
@@ -42,7 +40,7 @@ class Engine:
                 if x == "0":
                     self.menu(cursor, connection, allProduct)
                 else:
-                    text = Config.mauvaiseTouche
+                    text = Text.mauvaiseTouche
                     print(text)
                     self.menu(cursor, connection, allProduct)
             elif x == "3":
@@ -58,14 +56,14 @@ class Engine:
                 self.initialization(connection, allProduct)
 
             else:
-                text = Config.mauvaiseTouche
+                text = Text.mauvaiseTouche
                 print(text)
                 self.menu(cursor, connection, allProduct)
 
     # Select a detailed product by name or id
     def selectProduct(self, cursor, connection, allProduct):
         myDisplay = Display()
-        text = Config.displaySelectProd
+        text = Text.displaySelectProd
         print(text)
         x = input()
         if x == "1":
@@ -77,7 +75,7 @@ class Engine:
         elif x == "0":
             self.menu(cursor, connection, allProduct)
         else:
-            text = Config.mauvaiseTouche
+            text = Text.mauvaiseTouche
             print(text)
             self.selectProduct(cursor, connection, allProduct)
 
@@ -132,7 +130,7 @@ class Engine:
                                    connection=connection,
                                    allProduct=allProduct)
         else:
-            text = Config.produitInnexistant
+            text = Text.produitInnexistant
             print(text)
             self.selectProduct(cursor, connection, allProduct)
 
@@ -142,10 +140,10 @@ class Engine:
         myDisplay.displaySubtitu(product)
         x = input()
         if x == "1":
-            request = Requests.SaveFavorites
+            request = Requests.SaveFavorite
             val = (product[1], product[3], product[4], product[5], product[6])
             cursor.execute(request, val)
-            text = Configuration.Config.saveFavory
+            text = Text.saveFavory
             print(text)
             connection.commit()
             self.selectDisplay(pageNumber=0,
@@ -179,7 +177,7 @@ class Engine:
         if offset > maxPage:
             self.getProductByPage(1,
                                   cursor, connection, allProduct)
-        text = Config.displayAllProducts
+        text = Text.displayAllProducts
         print(text)
         request = Requests.pagesOfProducts
         data = {'offset': offset}
@@ -211,7 +209,7 @@ class Engine:
         elif x == "3":
             self.exitClean(connection)
         else:
-            text = Config.mauvaiseTouche
+            text = Text.mauvaiseTouche
             print(text)
             self.selectDisplay(pageNumber,
                                cursor, connection, allProduct)
@@ -239,7 +237,7 @@ class Engine:
         if offset > maxPage:
             self.getCategoriesByPage(1, cursor, connection,
                                      allProduct)
-        text = Config.selectCategories
+        text = Text.selectCategories
         print(text)
         request = Requests.pagesOfCategories
         data = {'offset': offset}
@@ -274,7 +272,7 @@ class Engine:
             self.exitClean(connection)
 
         else:
-            text = Config.mauvaiseTouche
+            text = Text.mauvaiseTouche
             print(text)
             self.selectCategorie(pageNumber, cursor, connection,
                                  allProduct, products, numberOfPage)
@@ -283,10 +281,10 @@ class Engine:
     def categorysProducts(self, pageNumber, cursor, connection,
                           allProduct):
         myDisplay = Display
-        text = Config.selectCategoriesProd
+        text = Text.selectCategoriesProd
         print(text)
         x = input(bcolors.PASS)  # enter category to view products
-        text = Config.displayAllProducts2
+        text = Text.displayAllProducts2
         print(text)
         request = Requests.selectCategory
         val = ("%" + x + "%",)
@@ -353,7 +351,7 @@ class Engine:
         request = Requests.emptyList
         cursor.execute(request)
         connection.commit()
-        text = Config.emptyList
+        text = Text.emptyList
         print(text)
         self.menu(cursor, connection, allProduct)
 

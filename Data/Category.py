@@ -1,13 +1,13 @@
 # coding=utf-8
-from Configuration import Requests
+from Data import Requests
 
 
-class CategorieProd:
+class Category:
 
     def __init__(self):
         pass
 
     def categoriesInsert(self, cursor, connection):
-        request = Requests.insertCategorieProd
+        request = Requests.insertCategory
         cursor.execute(request)
         connection.commit()

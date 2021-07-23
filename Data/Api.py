@@ -2,9 +2,9 @@
 import mysql.connector
 import requests
 from Data.Product import Product
-from Data.CategorieProd import CategorieProd
+from Data.Category import Category
 from Configuration import Config
-from Configuration.Display import Display
+from Data.Display import Display
 
 
 # Step 0 data recovery
@@ -70,7 +70,7 @@ class Api:
                 #     print("sif we are here it is because ",oneData["brands"]
                 #     ," has no nutriscore")
                 #     pass
-            myCategories = CategorieProd()
+            myCategories = Category()
             myCategories.categoriesInsert(cursor, connection)
 
         except mysql.connector.Error as error:
