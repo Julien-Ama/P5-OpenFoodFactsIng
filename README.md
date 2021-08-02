@@ -21,13 +21,13 @@ pour y parfaire son dynamisme de requêtes et d'affichages.
 
 Il s'agit d'une structure simple avec seulement 3 tables .
 
-products: Table majeure où on stocke toutes les données d'api sélectionnées de OpenFoodFacts traduit en "Json".
+product: Table majeure où on stocke toutes les données d'api sélectionnées de OpenFoodFacts traduit en "Json".
 elle a était construite en "MyISAM" pour favoriser la vitesse de lecture et donc la recherche de données.
 
-categorieProd: Même procédé que celle de "products" mais avec uniquement les "catégories" de produits.
+category: Même procédé que celle de "product" mais avec uniquement les "catégories" de produits.
 
-favori: Table vierge que l'utilisateur pourra remplir de ses produits favoris
-(celle-ci puisera les données venant de la table "products")
+favorite: Table vierge que l'utilisateur pourra remplir de ses produits favoris
+(celle-ci puisera les données venant de la table "product")
 
 specifications:
 
@@ -47,10 +47,10 @@ Our "Engine" can thus launch its mechanism by drawing on our configuration folde
 
 This is a simple structure with only 3 tables.
 
-products: Major table where we store all the api data selected from OpenFoodFacts translated into "Json".
+product: Major table where we store all the api data selected from OpenFoodFacts translated into "Json".
 it was built in "MyISAM" to promote the speed of reading and therefore the search for data.
 
-categorieProd: Same process as that of "products" but with only the "categories" of products.
+category: Same process as that of "product" but with only the "categories" of products.
 
-favori: Blank table that the user can fill with his favorite products
-(this will take the data from the "products" table)
+favorite: Blank table that the user can fill with his favorite products
+(this will take the data from the "product" table)
