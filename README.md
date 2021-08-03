@@ -16,7 +16,7 @@ To extract the api data, please see in Configuration.Config(Api/DB)
 Le coeur de notre projet se trouve dans le dossier, fichier "Engine";
 activé par notre fichier "Reception" et alimentée par toute les données récupérées et réparties
 dans notre dossier "Data".
-Notre "Engine" peut ainsi lancer son mécanisme en puisant dans notre dossier configuration 
+Notre "Engine" peut ainsi lancer son mécanisme en puisant dans les fichiers "Display" et Text" 
 pour y parfaire son dynamisme de requêtes et d'affichages.
 
 Il s'agit d'une structure simple avec seulement 3 tables .
