@@ -1,10 +1,10 @@
 # coding=utf-8
 import mysql.connector
 import requests
-from Data.Product import Product
-from Data.Category import Category
-from Configuration import Config
-from Data.Display import Display
+from databasep5.Data.Product import Product
+from databasep5.Data.Category import Category
+from databasep5.Configuration import Config
+from databasep5.Data.Display import Display
 
 
 # Step 0 data recovery

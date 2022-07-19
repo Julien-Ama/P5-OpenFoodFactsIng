@@ -1,9 +1,9 @@
 # coding=utf-8
 import bcolors as bcolors
 import sys
-from Data.Api import Api
-from Data import Text, Requests
-from Data.Display import Display
+from databasep5.Data.Api import Api
+from databasep5.Data import Text, Requests
+from databasep5.Data.Display import Display
 from math import ceil
 
 

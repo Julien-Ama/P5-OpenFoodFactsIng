@@ -3,10 +3,6 @@ import bcolors
 
 # -------- short Text -------- #
 
-# firsTime = (bcolors.WARN +
-#             "Si il s'agit de votre première utilisation, "
-#             "inserez la touche: 'i'\n" + "")
-
 displaySelectProd = (bcolors.BLUE +
                      "1 - Chercher un produit en inscrivant son nom\n"
                      "3 - Chercher un produit en incrivant son numéro\n"

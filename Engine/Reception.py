@@ -1,7 +1,7 @@
 # coding=utf-8
-from Engine.Engine import Engine
-from Data.Category import Category
-from Configuration import Config
+from databasep5.Engine.Engine import Engine
+from databasep5.Data.Category import Category
+from databasep5.Configuration import Config
 
 
 class Reception:

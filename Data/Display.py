@@ -1,8 +1,8 @@
 # coding=utf-8
 import bcolors as bcolors
 from tabulate import tabulate
-import Configuration.Config
-from Data import Text, Requests
+from databasep5.Configuration import Config
+from databasep5.Data import Text, Requests
 from math import ceil
 
 
@@ -216,31 +216,31 @@ class Display:
         print(text)
 
     def initAll(self, allProduct):
-        if len(allProduct) == Configuration.Config.tenPercent:
+        if len(allProduct) == Config.tenPercent:
             text = Text.one
             print(text)
-        if len(allProduct) == Configuration.Config.twentyPercent:
+        if len(allProduct) == Config.twentyPercent:
             text = Text.two
             print(text)
-        if len(allProduct) == Configuration.Config.thirtyPercent:
+        if len(allProduct) == Config.thirtyPercent:
             text = Text.three
             print(text)
-        if len(allProduct) == Configuration.Config.fourtyPercent:
+        if len(allProduct) == Config.fourtyPercent:
             text = Text.four
             print(text)
-        if len(allProduct) == Configuration.Config.fiftyPercent:
+        if len(allProduct) == Config.fiftyPercent:
             text = Text.five
             print(text)
-        if len(allProduct) == Configuration.Config.sixtyPercent:
+        if len(allProduct) == Config.sixtyPercent:
             text = Text.six
             print(text)
-        if len(allProduct) == Configuration.Config.seventyPercent:
+        if len(allProduct) == Config.seventyPercent:
             text = Text.seven
             print(text)
-        if len(allProduct) == Configuration.Config.eightyPercent:
+        if len(allProduct) == Config.eightyPercent:
             text = Text.height
             print(text)
-        if len(allProduct) == Configuration.Config.ninetyPercent:
+        if len(allProduct) == Config.ninetyPercent:
             text = Text.nine
             print(text)
 
